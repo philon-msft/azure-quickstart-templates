@@ -13,9 +13,6 @@
     },
     "spAppAvailabilitySetName": {
       "type": "string"
-    },
-    "location": {
-      "type": "string"
     }
   },
   "resources": [
@@ -23,15 +20,14 @@
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[parameters('adAvailabilitySetName')]",
       "apiVersion": "2015-06-15",
-      "location": "[parameters('location')]",
-      "properties": {
-      }
+      "location": "[resourceGroup().location]",
+      "properties": {}
     },
     {
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[parameters('sqlAvailabilitySetName')]",
       "apiVersion": "2015-06-15",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "properties": {
         "platformFaultDomainCount": 3,
         "platformUpdateDomainCount": 3
@@ -41,33 +37,31 @@
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[parameters('spWebAvailabilitySetName')]",
       "apiVersion": "2015-06-15",
-      "location": "[parameters('location')]",
-      "properties": {
-      }
+      "location": "[resourceGroup().location]",
+      "properties": {}
     },
     {
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[parameters('spAppAvailabilitySetName')]",
       "apiVersion": "2015-06-15",
-      "location": "[parameters('location')]",
-      "properties": {
-      }
+      "location": "[resourceGroup().location]",
+      "properties": {}
     }
   ],
   "outputs": {
-    "adAvailabilitySetName": {
+    "adAvailabilitySetId": {
       "type": "string",
       "value": "[resourceId('Microsoft.Compute/availabilitySets',parameters('adAvailabilitySetName'))]"
     },
-    "sqlAvailabilitySetName": {
+    "sqlAvailabilitySetId": {
       "type": "string",
       "value": "[resourceId('Microsoft.Compute/availabilitySets',parameters('sqlAvailabilitySetName'))]"
     },
-    "spWebAvailabilitySetName": {
+    "spWebAvailabilitySetId": {
       "type": "string",
       "value": "[resourceId('Microsoft.Compute/availabilitySets',parameters('spWebAvailabilitySetName'))]"
     },
-    "spAppAvailabilitySetName": {
+    "spAppAvailabilitySetId": {
       "type": "string",
       "value": "[resourceId('Microsoft.Compute/availabilitySets',parameters('spAppAvailabilitySetName'))]"
     }

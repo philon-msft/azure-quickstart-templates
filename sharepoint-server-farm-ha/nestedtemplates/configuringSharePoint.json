@@ -8,9 +8,6 @@
     "sqlVMName": {
       "type": "string"
     },
-    "location": {
-      "type": "string"
-    },
     "spConfigurationModulesURL": {
       "type": "string"
     },
@@ -80,7 +77,7 @@
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('spappVMName'),'0/ConfigureSPAppServer')]",
       "apiVersion": "2015-06-15",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "properties": {
         "publisher": "Microsoft.Powershell",
         "type": "DSC",
@@ -140,7 +137,7 @@
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('spappVMName'),'1/ConfigureSPAppServer')]",
       "apiVersion": "2015-06-15",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "dependsOn": [
         "[resourceId('Microsoft.Compute/virtualMachines/extensions', concat(parameters('spappVMName'),'0'),'ConfigureSPAppServer')]"
       ],
@@ -200,7 +197,7 @@
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('spwebVMName'),'0/ConfigureSPWebServer')]",
       "apiVersion": "2015-06-15",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "dependsOn": [
         "[resourceId('Microsoft.Compute/virtualMachines/extensions', concat(parameters('spappVMName'),'0'), 'ConfigureSPAppServer')]"
       ],
@@ -260,7 +257,7 @@
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('spwebVMName'),'1/ConfigureSPWebServer')]",
       "apiVersion": "2015-06-15",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "dependsOn": [
         "[resourceId('Microsoft.Compute/virtualMachines/extensions', concat(parameters('spwebVMName'),'0'), 'ConfigureSPWebServer')]"
       ],

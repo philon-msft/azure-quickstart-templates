@@ -5,9 +5,6 @@
     "adBDCVMName": {
       "type": "string"
     },
-    "location": {
-      "type": "string"
-    },
     "storageAccountNamePrefix": {
       "type": "string"
     },
@@ -53,7 +50,7 @@
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[parameters('adBDCVMName')]",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "properties": {
         "hardwareProfile": {
           "vmSize": "[parameters('adVMSize')]"
@@ -113,7 +110,7 @@
           "type": "extensions",
           "name": "CreateBDC",
           "apiVersion": "2015-06-15",
-          "location": "[parameters('location')]",
+          "location": "[resourceGroup().location]",
           "dependsOn": [
             "[resourceId('Microsoft.Compute/virtualMachines/', parameters('adBDCVMName'))]"
           ],

@@ -8,9 +8,6 @@
     "spwebVMName": {
       "type": "string"
     },
-    "location": {
-      "type": "string"
-    },
     "spVMSize": {
       "type": "string"
     },
@@ -59,7 +56,7 @@
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[concat(parameters('spappVMName'), copyIndex())]",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "copy": {
         "name": "spAppVMLoop",
         "count": 2
@@ -123,7 +120,7 @@
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('spappVMName'), copyIndex(),'/ConfigureSPAppServer')]",
       "apiVersion": "2015-06-15",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "dependsOn": [
         "[resourceId('Microsoft.Compute/virtualMachines', concat(parameters('spappVMName'),copyIndex()))]"
       ],
@@ -151,7 +148,7 @@
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[concat(parameters('spwebVMName'), copyIndex())]",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "copy": {
         "name": "spWebVMLoop",
         "count": 2
@@ -215,7 +212,7 @@
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('spwebVMName'), copyIndex(),'/ConfigureSPWebServer')]",
       "apiVersion": "2015-06-15",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "dependsOn": [
         "[resourceId('Microsoft.Compute/virtualMachines', concat(parameters('spwebVMName'),copyIndex()))]"
       ],
